@@ -42,7 +42,7 @@ module.exports = (app) => {
           })
 
     } else {
-        res.render('errorPage/error')
+        res.render('errorPage/401', { message: "You are not authorized to search patients! Please log in."})
     }
 
   })
@@ -56,7 +56,7 @@ module.exports = (app) => {
           console.log(err.message)
         })
     } else {
-        res.render('errorPage/error')
+        res.render('errorPage/401', { message: "You are not logged in!"})
     }
   })
 

@@ -36,13 +36,15 @@ module.exports = (app) => {
     User.findOne({ email, type }, 'email type password').then((user) => {
       if (!user) {
         // User not found
-        return res.status(401).send({ message: 'Wrong Username' });
+        res.render('errorPage/401', { message: 'Wrong Email' });
+        return res.status(401);
       }
       // Check the password
       user.comparePassword(password, (err, isMatch) => {
         if (!isMatch) {
           // Password does not match
-          return res.status(401).send({ message: "Wrong password"});
+          res.render('errorPage/401',{ message: "Wrong Password"});
+          return res.status(401);
         }
         // Create a token
         const token = jwt.sign(
