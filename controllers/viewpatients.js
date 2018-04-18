@@ -11,6 +11,14 @@ module.exports = (app) => {
     // let userType = Util.checkType(req.user)
     // console.log(userType)
 
+    let checkType = () => {
+        User.findById(req.user._id).then((user) => {
+            return user
+        })
+    }
+
+    console.log(checkType)
+
     Patient.find({}).then((patients) => {
       res.render('view-patients.hbs', { patients })
       // console.log(req.cookies);
