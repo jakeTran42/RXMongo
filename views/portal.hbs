@@ -16,6 +16,11 @@
         -webkit-transition: width 250ms ease-in-out;
         transition: width 250ms ease-in-out;
       }
+
+    .cur-user-firstname {
+        text-transform: uppercase;
+    }
+
 </style>
 
 <div class="logged-wrapper">
@@ -23,7 +28,7 @@
   <div class="log-in-nav">
     <!-- <h1>Logo</h1> -->
     <div style="color: #000; font-size: 40px; text-align: center; padding-bottom: 30px;">
-        <h5><b>Hello!</b></h5>
+        <h5><b class="cur-user-firstname">{{cur_user.type}}</b></h5>
     </div>
 
     <div class="icon icon-danger" style="color: #000; font-size: 40px; text-align: center; padding-bottom: 30px;">
@@ -43,6 +48,7 @@
   </div>
 
   <div class="header-container">
+
       <div class="icon icon-danger" style="color: #000; font-size: 32px; padding-left: 1113px; padding-top: 19px;">
           <a href="/" style="color: #000;"><i class="nc-icon nc-layout-11"></i></a>
       </div>
@@ -53,17 +59,22 @@
       <div class="icon icon-danger" style="color: #000; font-size: 32px; padding-left: 1113px; padding-top: 19px;">
           <i class="nc-icon nc-ambulance"></i>
       </div>
-    <div class="search-patient">
-      <form class="patient-search-input" action="/">
+
+    <div class="search-patient" style="display: flex; flex-direction: column;">
+
+        <div class="welcome-message">
+            <h1>WELCOME <span style="color: #f44271" >{{cur_user.firstname}}</span></h1>
+        </div>
+
+      <form class="patient-search-input" action="/searchBy">
           <div class="input-field">
               <!-- <input id="name-field" placeholder="Enter Name" type="text" name="client-name" value="{{client-name}}"> -->
               <div class="nameField" style="display: flex; flex-direction: row;">
-                <input id="firstname-field" placeholder="Client First Name" type="search" name="client-firstname">
-                <input id="lastname-field" placeholder="Client Last Name" type="search" name="client-lastname">
+                <input required="" id="firstname-field" placeholder="Client First Name" type="search" name="fname">
+                <input required="" id="lastname-field" placeholder="Client Last Name" type="search" name="lname">
               </div>
               <span></span>
-              <input required="" type="text" class="form-control" placeholder="Date of Birth" onfocus="(this.type='date')" style="text-align: center;" name="search-date" value="{{search-date}}"/>
-              <!-- <input id="date-field" placeholder="Enter Date of birth" type="date" name="search-date" value="{{search-date}}"> -->
+              <!-- <input required="" type="text" class="form-control" placeholder="Date of Birth" onfocus="(this.type='date')" style="text-align: center;" name="search-date" value="{{search-date}}"/> -->
               <span></span>
           </div>
           <button id="search-submit" type="submit">Search</button>
