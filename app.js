@@ -18,7 +18,7 @@ app.set('view engine', 'hbs')
 app.use(express.static(__dirname));
 app.use(express.static('./public'));
 mongoose.Promise = global.Promise
-mongoose.connect('mongodb://localhost/RxControl');
+mongoose.connect(process.env.MONGODB_URI ||'mongodb://localhost/RxControl');
 mongoose.connection.on('error', console.error.bind(console, 'MongoDB connection Error:'))
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride('_method'))
@@ -62,6 +62,6 @@ require('./controllers/viewpatients.js')(app);
 require('./controllers/auth.js')(app);
 require('./controllers/portals.js')(app);
 
-app.listen(3000, () => {
-  console.log('App listening on port 3000!')
-});
+app.listen(process.env.PORT || 3000, function(){
+    console.log('Portfolio App listening on port 3000!')
+})
