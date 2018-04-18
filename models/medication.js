@@ -7,9 +7,11 @@ const MedSchema = new Schema({
 
   drugName:       { type: String, required: true },
   dosage:         { type: String, required: true },
-  quantity:       { type: String },
-  prescriber:     { type: Number, required: true },
-  thisPharmacist: [{ type: Schema.Types.ObjectId, ref: 'Pharmacist' }],
+  quantity:       { type: Number },
+  prescriber:     { type: String, required: true },
+  prescriberDEA:  { type: Number, required: true },
+  pharmacyID:     { type: Number, required: true }
+  // thisPharmacist: [{ type: Schema.Types.ObjectId, ref: 'Pharmacist' }],
 })
 
 MedSchema.pre('save', (next) => {

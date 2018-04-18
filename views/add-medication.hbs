@@ -83,13 +83,12 @@
 </style>
 
 
-</form>
 <div class="form-style-8">
-  <h2>Add Patient</h2>
+  <h2>Add Medication</h2>
   <form method="POST" action="/add/med">
     <input type="text" name="firstname" placeholder="Patient First Name" />
     <input type="text" name="lastname" placeholder="Patient Last Name">
-    <input onfocus="(this.type='date')" onblur="(this.type='text')" name="dob" placeholder="Date of Birth" />
+    <input required="" type="text" class="form-control" placeholder="Date of Birth" onfocus="(this.type='date')" style="text-align: center;"/>
     <input type="text" name="medication" placeholder="What Medication was Prescribed">
     <div class="dosage-quan">
         <input type="text" name="dosage" placeholder="Dosage" />

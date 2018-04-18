@@ -1,26 +1,33 @@
-var Med = require('../models/medication');
+const Med = require('../models/medication')
+const Patient = require('../models/patient')
 
 
 module.exports = (app) => {
 
-    // GET
+  // CREATE
+  app.post('/patients/:patientId/medications', function (req, res) {
+    // INSTANTIATE INSTANCE OF MODEL
+    const med = new Med(req.body)
 
-    app.get('/med/new', function (req, res) {
 
-      // var currentUser = req.user
-
-      res.render('add-medication');
-   })
-
-    // CREATE
-  app.post('/add/med', (req, res) => {
-    // INSTANTIATE INSTANCE OF POST MODEL
-    var med = new Med(req.body);
-
-    // SAVE INSTANCE OF POST MODEL TO DB
-    med.save((err, post) => {
-      // REDIRECT TO THE ROOT
-      return res.redirect(`/`);
+    med.save().then((med) => {
+      return Patient.findById(req.params.patientId)
+    }).then((patient) => {
+      patient.meds.unshift(med)
+      return patient.save()
+    }).then((patient) => {
+      res.redirect(`/`)
+    }).catch((err) => {
+      console.log(err)
     })
-  });
+
+    // SAVE INSTANCE OF med MODEL TO DB
+    // med.save().then((med) => {
+    //   // REDIRECT TO THE ROOT
+    //   return res.redirect(`/home`)
+    // }).catch((err) => {
+    //   console.log(err);
+    // })
+  })
+
 };

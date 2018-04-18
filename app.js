@@ -21,14 +21,31 @@ app.use(methodOverride('_method'))
 app.use(cookieParser());
 
 
-
+// Index Navigation
 app.get('/', (req, res) => {
     res.render('index')
 });
 
+app.get('/signup', (req, res) => {
+    res.render('reg-selection')
+});
+
+app.get('/login', (req, res) => {
+    res.render('login-form')
+});
+
+app.get('/new/pharmacist', (req, res) => {
+    res.render('phar-reg-form')
+});
+
+app.get('/new/doctor', (req, res) => {
+    res.render('doc-reg-form')
+});
 
 
 require('./controllers/medications.js')(app);
+require('./controllers/patients.js')(app);
+require('./controllers/viewpatients.js')(app);
 
 app.listen(3000, () => {
   console.log('App listening on port 3000!')

@@ -1,6 +1,23 @@
+var Patient = require('../models/patient');
+
+
 module.exports = (app) => {
   // CREATE
-  app.post('/patient/new', (req,res) => {
-    console.log(req.body)
-  });
+
+  app.get('/new/patient', function (req, res) {
+    // var currentUser = req.user
+    res.render('add-patient');
+ })
+
+   app.post('/patient', (req, res) => {
+       // INSTANTIATE INSTANCE OF POST MODEL
+       var patient = new Patient(req.body);
+
+       // SAVE INSTANCE OF POST MODEL TO DB
+       patient.save((err, patient) => {
+         // REDIRECT TO THE ROOT
+         return res.redirect(`/`);
+       })
+     });
+
 };
