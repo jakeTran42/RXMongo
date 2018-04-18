@@ -11,13 +11,17 @@ module.exports = (app) => {
 
    app.post('/patient', (req, res) => {
        // INSTANTIATE INSTANCE OF POST MODEL
-       var patient = new Patient(req.body);
+       if (req.user) {
+           var patient = new Patient(req.body);
 
-       // SAVE INSTANCE OF POST MODEL TO DB
-       patient.save((err, patient) => {
-         // REDIRECT TO THE ROOT
-         return res.redirect(`/patients/` + patient._id);
-       })
+           // SAVE INSTANCE OF POST MODEL TO DB
+           patient.save((err, patient) => {
+             // REDIRECT TO THE ROOT
+             return res.redirect(`/patients/` + patient._id);
+           })
+       } else {
+           res.render('errorPage/401')
+       }
      });
 
 };

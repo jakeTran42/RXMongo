@@ -31,10 +31,13 @@
         <h5><b class="cur-user-firstname">{{cur_user.type}}</b></h5>
     </div>
 
-    <div class="icon icon-danger" style="color: #000; font-size: 40px; text-align: center; padding-bottom: 30px;">
-        <i class="nc-icon nc-single-02"></i>
-        <h5><b>Profile</b></h5>
-    </div>
+    <a href="/profile">
+        <div class="icon icon-danger" style="color: #000; font-size: 40px; text-align: center; padding-bottom: 30px;">
+            <i class="nc-icon nc-single-02"></i>
+            <h5><b>Profile</b></h5>
+        </div>
+    </a>
+
     <div class="icon icon-danger" style="color: #000; font-size: 40px; text-align: center; padding-bottom: 30px;">
         <i class="nc-icon nc-settings-gear-65"></i>
         <h5><b>Settings</b></h5>
@@ -70,11 +73,11 @@
           <div class="input-field">
               <!-- <input id="name-field" placeholder="Enter Name" type="text" name="client-name" value="{{client-name}}"> -->
               <div class="nameField" style="display: flex; flex-direction: row;">
-                <input required="" id="firstname-field" placeholder="Client First Name" type="search" name="fname">
-                <input required="" id="lastname-field" placeholder="Client Last Name" type="search" name="lname">
+                <input style="text-transform: capitalize;" required="" id="firstname-field" placeholder="Client First Name" type="search" name="fname">
+                <input style="text-transform: capitalize;" required="" id="lastname-field" placeholder="Client Last Name" type="search" name="lname">
               </div>
               <span></span>
-              <!-- <input required="" type="text" class="form-control" placeholder="Date of Birth" onfocus="(this.type='date')" style="text-align: center;" name="search-date" value="{{search-date}}"/> -->
+              <input required="" type="text" class="form-control" placeholder="Date of Birth" onfocus="(this.type='date')" style="text-align: center;" name="dob"/>
               <span></span>
           </div>
           <button id="search-submit" type="submit">Search</button>

@@ -10,13 +10,16 @@
 
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav ml-auto">
+                  {{#if currentUser}}
                   <a href="/home" class="btn btn-link btn-neutral" style="color: #6cc091;">View Patient</a>
+                  <a href="#about" class="btn btn-link btn-neutral" style="color: #6cc091;">About Us</a>
+                  <a href="#contact" class="btn btn-link btn-neutral" style="color: #6cc091;">Contact</a>
+                  <a href="/portals" class="btn btn-link btn-neutral" style="color: #6cc091;">Portal</a>
+                  {{else}}
                   <a href="#about" class="btn btn-link btn-neutral" style="color: #6cc091;">About Us</a>
                   <a href="#contact" class="btn btn-link btn-neutral" style="color: #6cc091;">Contact</a>
                   <a href="/signup" class="btn btn-link btn-neutral" style="color: #6cc091;">Register</a>
                   <a href="/login" class="btn btn-link btn-neutral" style="color: #6cc091;">Login</a>
-                  {{#if currentUser}}
-                      <a href="/portals" class="btn btn-link btn-neutral" style="color: #6cc091;">Portal</a>
                   {{/if}}
               </ul>
           </div>

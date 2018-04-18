@@ -31,8 +31,9 @@ module.exports = (app) => {
   app.post('/login', (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
+    const type = req.body.type;
     // Find this user name
-    User.findOne({ email }, 'email password').then((user) => {
+    User.findOne({ email, type }, 'email type password').then((user) => {
       if (!user) {
         // User not found
         return res.status(401).send({ message: 'Wrong Username' });
@@ -45,7 +46,7 @@ module.exports = (app) => {
         }
         // Create a token
         const token = jwt.sign(
-          { _id: user._id, email: user.email }, process.env.SECRET,
+          { _id: user._id, email: user.email, type: user.type }, process.env.SECRET,
           { expiresIn: "60 days" }
         );
         // Set a cookie and redirect to root

@@ -211,11 +211,11 @@
           <div class="each-medication" style="display: flex; flex-direction: column;">
             {{#each patient.meds}}
             <div class="each-med" style="display: flex; flex-direction: row; border-bottom: 1px solid grey;">
-              <h3> <span style="color: #f44271">Drug</span> {{this.drugName}}</h3>
-              <h3><span style="color: #f44271">Dosage</span> {{this.dosage}} </h3>
-              <h3><span style="color: #f44271">Prescribed Date</span> {{this.createdAt}}</h3>
-              <h3><span style="color: #f44271">Quantity</span> {{this.quantity}}</h3>
-              <h3><span style="color: #f44271">Prescriber DEA</span> {{this.prescriberDEA}}</h3>
+              <h3>Drug: {{this.drugName}}</h3>
+              <h3>Dosage: {{this.dosage}} </h3>
+              <h3>Date Prescribed: {{this.createdAt}}</h3>
+              <h3>Quantity: {{this.quantity}}</h3>
+              <h3>Prescriber's DEA: {{this.prescriberDEA}}</h3>
             </div>
             {{/each}}
           </div>
@@ -237,44 +237,30 @@
 
   </div>
 
-  <div class="MedForm-show {{currentType}}">
-
-    <style>
-        .form-style-8 {
-            display: none;
-        }
-        .MedForm-show.isPharmacist .form-style-8 {
-            display: block;
-        }
-
-    </style>
-
-      <div class="form-style-8">
-        <h2>Add Medication to <span style="color: #f44271;">{{patient.firstname}} {{patient.lastname}}</span></h2>
-        <form method="POST" action="/patients/{{patient._id}}/medications">
-          <input style="text-transform: capitalize;" required="" type="text" name="drugName" placeholder="What Medication was Prescribed">
-          <div class="dosage-quan">
-              <input required="" type="number" name="dosage" placeholder="Dosage" />
-              <input required="" type="number" name="quantity" placeholder="Quantity" />
-          </div>
-
-          <div class="verify-medicine">
-              <input style="text-transform: capitalize;" required="" type="text" name="prescriber" placeholder="Prescriber" />
-              <input required="" type="number" name="prescriberDEA" placeholder="Doctor's DEA" />
-              <input required="" type="number" name="pharmacyID" placeholder="Pharmacy ID" />
-
-          </div>
-
-          <span>
-
-              <button type="submit" style="border-color: #6cc091; color: #6cc091"> Submit </button>
-              <a class="cancelBtn" href="/" role="button" style="color: red;text-decoration: none; padding: 12px; border: 1px solid red; border-radius: 5px;">Cancel</a>
-
-          </span>
-        </form>
+  <div class="form-style-8">
+    <h2>Add Medication to <span style="color: #f44271;">{{patient.firstname}} {{patient.lastname}}</span></h2>
+    <form method="POST" action="/patients/{{patient._id}}/medications">
+      <input style="text-transform: capitalize;" required="" type="text" name="drugName" placeholder="What Medication was Prescribed">
+      <div class="dosage-quan">
+          <input required="" type="number" name="dosage" placeholder="Dosage" />
+          <input required="" type="number" name="quantity" placeholder="Quantity" />
       </div>
-  </div>
 
+      <div class="verify-medicine">
+          <input style="text-transform: capitalize;" required="" type="text" name="prescriber" placeholder="Prescriber" />
+          <input required="" type="number" name="prescriberDEA" placeholder="Doctor's DEA" />
+          <input required="" type="number" name="pharmacyID" placeholder="Pharmacy ID" />
+
+      </div>
+
+      <span>
+
+          <button type="submit" style="border-color: #6cc091; color: #6cc091"> Submit </button>
+          <a class="cancelBtn" href="/" role="button" style="color: red;text-decoration: none; padding: 12px; border: 1px solid red; border-radius: 5px;">Cancel</a>
+
+      </span>
+    </form>
+  </div>
 
 
 

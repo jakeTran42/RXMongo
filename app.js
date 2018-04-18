@@ -25,7 +25,7 @@ app.use(methodOverride('_method'))
 app.use(cookieParser());
 
 var checkAuth = (req, res, next) => {
-  console.log("Checking authentication");
+  // console.log("Checking authentication");
   // console.log(req.user)
   if (typeof req.cookies.nToken === 'undefined' || req.cookies.nToken === null) {
     req.user = null;

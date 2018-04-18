@@ -6,13 +6,18 @@ module.exports = (app) => {
   // CREATE
 
   app.get('/portals', function (req, res) {
-    var id = req.user._id
-    // console.log(req.user._id
-    User.findById(req.user._id).then((cur_user) => {
-      res.render('portal', { cur_user })
-    }).catch((err) => {
-      console.log(err.message)
-    })
+
+    if (req.user) {
+        var id = req.user._id
+        User.findById(req.user._id).then((cur_user) => {
+          res.render('portal', { cur_user })
+        }).catch((err) => {
+          console.log(err.message)
+        })
+    } else {
+        res.render('errorPage/401')
+    }
+
   })
 
 
@@ -23,11 +28,36 @@ module.exports = (app) => {
   });
 
   app.get('/searchBy', (req, res) => {
-        Patient.find({'firstname': req.query.fname, 'lastname': req.query.lname}).then((patient) => {
-            res.render('show-patient', {patient, user: req.user})
+
+    if (req.user) {
+
+        Patient.findOne({firstname: req.query.fname, lastname: req.query.lname, dob: req.query.dob}).then((cur_patient) => {
+            // res.render('show-patient', {patient, user: req.user})
+            patientId = cur_patient._id
+            // console.log(patientId)
+            res.redirect(`/patients/` + patientId);
           }).catch((err) => {
+              res.render('add-patient', {message: "This Patient Does Not Exist In Our DataBase"})
             console.log(err.message)
           })
-    })
+
+    } else {
+        res.render('errorPage/error')
+    }
+
+  })
+
+  app.get('/profile', function (req, res) {
+    if (req.user) {
+        var id = req.user._id
+        User.findById(req.user._id).then((cur_user) => {
+          res.render('profile', { cur_user })
+        }).catch((err) => {
+          console.log(err.message)
+        })
+    } else {
+        res.render('errorPage/error')
+    }
+  })
 
 };
