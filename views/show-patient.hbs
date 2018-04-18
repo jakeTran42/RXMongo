@@ -147,7 +147,12 @@
 
   .modal-body {padding: 2px 16px;}
 
-  .modal-body h3 {
+  /* .modal-body h3 {
+    border-right: 1px solid grey;
+    padding: 10px;
+  } */
+
+  .each-med h3 {
     border-right: 1px solid grey;
     padding: 10px;
   }
@@ -203,13 +208,15 @@
       </div>
       <div class="modal-body">
         <div class="separation-content">
-          <div class="each-medication" style="display: flex; flex-direction: column; border-bottom: 1px; solid #222;">
+          <div class="each-medication" style="display: flex; flex-direction: column;">
             {{#each patient.meds}}
-              <h3>Name: {{this.drugName}}</h3>
+            <div class="each-med" style="display: flex; flex-direction: row; border-bottom: 1px solid grey;">
+              <h3>Drug: {{this.drugName}}</h3>
               <h3>Dosage: {{this.dosage}} </h3>
               <h3>Date Prescribed: {{this.createdAt}}</h3>
               <h3>Quantity: {{this.quantity}}</h3>
               <h3>Prescriber's DEA: {{this.prescriberDEA}}</h3>
+            </div>
             {{/each}}
           </div>
         </div>
@@ -231,7 +238,7 @@
   </div>
 
   <div class="form-style-8">
-    <h2>Add Medication to {{patient.firstname}} {{patient.lastname}}</h2>
+    <h2>Add Medication to <span style="color: #f44271;">{{patient.firstname}} {{patient.lastname}}</span></h2>
     <form method="POST" action="/patients/{{patient._id}}/medications">
       <input required="" type="text" name="drugName" placeholder="What Medication was Prescribed">
       <div class="dosage-quan">

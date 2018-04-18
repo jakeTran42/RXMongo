@@ -16,7 +16,7 @@ module.exports = (app) => {
       patient.meds.unshift(med)
       return patient.save()
     }).then((patient) => {
-      res.redirect(`/`)
+      res.redirect(`/patients/` + patient._id)
     }).catch((err) => {
       console.log(err)
     })

@@ -86,19 +86,20 @@
 </form>
 <div class="form-style-8">
   <h2>Register as Doctor Account</h2>
-  <form method="POST" action="/doc-register">
+  <form method="POST" action="/sign-up">
     <input type="text" name="firstname" placeholder="First Name" />
     <input type="text" name="lastname" placeholder="Last Name">
     <input type="password" name="password" placeholder="Password" />
     <input type="email" name="email" placeholder="Email" />
     <input type="text" name="address" placeholder="Address of Workplace" />
     <!-- <input type="date" name="dob" placeholder="Date of Birth" /> -->
-    <input required="" type="text" class="form-control" placeholder="Date of Birth" onfocus="(this.type='date')" style="text-align: center;"/>
+    <input required="" type="text" name="dob" class="form-control" placeholder="Date of Birth" onfocus="(this.type='date')" style="text-align: center;"/>
     <input type="tel" name="phoneNumber" placeholder="Phone Number (123)-456-7890" />
     <div class="verified-doc">
         <input name="NPI" placeholder="NPI Number" type="number" />
         <input name="DEA" placeholder="DEA Number" type="text" />
     </div>
+    <input type="text" name="type" value="doctor" style="display: none;">
     <span>
 
         <button type="submit" style="border-color: #6cc091; color: #6cc091"> Register </button>

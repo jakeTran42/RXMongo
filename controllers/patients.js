@@ -16,7 +16,7 @@ module.exports = (app) => {
        // SAVE INSTANCE OF POST MODEL TO DB
        patient.save((err, patient) => {
          // REDIRECT TO THE ROOT
-         return res.redirect(`/`);
+         return res.redirect(`/patients/` + patient._id);
        })
      });
 

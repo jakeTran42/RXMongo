@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require('express')
 const app = express()
 const path = require('path');
@@ -5,6 +7,8 @@ var methodOverride = require('method-override')
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
+var jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
 
 
 const hbs = require('express-handlebars');
@@ -20,18 +24,27 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride('_method'))
 app.use(cookieParser());
 
+var checkAuth = (req, res, next) => {
+  console.log("Checking authentication");
+  // console.log(req.user)
+  if (typeof req.cookies.nToken === 'undefined' || req.cookies.nToken === null) {
+    req.user = null;
+    console.log('Invalid user')
+  } else {
+    var token = req.cookies.nToken;
+    var decodedToken = jwt.decode(token, { complete: true }) || {};
+    req.user = decodedToken.payload;
+  }
+
+  next()
+}
+app.use(checkAuth);
+
 
 // Index Navigation
 app.get('/', (req, res) => {
-    res.render('index')
-});
-
-app.get('/signup', (req, res) => {
-    res.render('reg-selection')
-});
-
-app.get('/login', (req, res) => {
-    res.render('login-form')
+  currentUser = req.user
+    res.render('index', {currentUser})
 });
 
 app.get('/new/pharmacist', (req, res) => {
@@ -46,6 +59,8 @@ app.get('/new/doctor', (req, res) => {
 require('./controllers/medications.js')(app);
 require('./controllers/patients.js')(app);
 require('./controllers/viewpatients.js')(app);
+require('./controllers/auth.js')(app);
+require('./controllers/portals.js')(app);
 
 app.listen(3000, () => {
   console.log('App listening on port 3000!')

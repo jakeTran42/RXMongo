@@ -96,7 +96,7 @@
 </form>
 <div class="form-style-8">
   <h2>Register as Pharmacist Account</h2>
-  <form method="POST" action="/phar-register">
+  <form method="POST" action="/sign-up">
     <input type="text" name="firstname" placeholder="First Name" />
     <input type="text" name="lastname" placeholder="Last Name">
     <input type="password" name="password" placeholder="Password" />
@@ -109,6 +109,7 @@
         <input name="HIN" placeholder="HIN Number" type="text" />
     </div>
     <input type="number" name="licenseNumber" placeholder="License Number" />
+    <input type="text" name="type" value="pharmacist" style="display: none;">
     <span id="btns-phar-form">
         <button type="submit" id="phar-submit-btn" style="border-color: #6cc091; color: #6cc091; margin-right: 10px;"> Register </button>
         <a class="cancelBtn" href="/" role="button" style="color: red;text-decoration: none; padding: 12px; border: 1px solid red; border-radius: 5px;">Cancel</a>

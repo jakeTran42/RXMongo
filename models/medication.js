@@ -3,7 +3,6 @@ const Schema = mongoose.Schema
 
 const MedSchema = new Schema({
   createdAt:      { type: Date },
-  updatedAt:      { type: Date },
 
   drugName:       { type: String, required: true },
   dosage:         { type: String, required: true },
@@ -14,14 +13,11 @@ const MedSchema = new Schema({
   // thisPharmacist: [{ type: Schema.Types.ObjectId, ref: 'Pharmacist' }],
 })
 
-MedSchema.pre('save', (next) => {
+MedSchema.pre('save', function(next){
   // SET createdAt AND updatedAt
-  const now = new Date()
-  this.updatedAt = now
-  if (!this.createdAt) {
-    this.createdAt = now
-  }
-  next()
-})
+  var now = new Date();
+  this.createdAt = now;
+  next();
+});
 
 module.exports = mongoose.model('Med', MedSchema)

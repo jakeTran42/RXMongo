@@ -7,6 +7,7 @@ module.exports = (app) => {
   app.get('/home', function (req, res) {
     Patient.find({}).then((patients) => {
       res.render('view-patients.hbs', { patients })
+      // console.log(req.cookies);
     }).catch((err) => {
       console.log(err.message);
     })
