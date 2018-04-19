@@ -13,11 +13,9 @@ module.exports = (app) => {
 
     let checkType = () => {
         User.findById(req.user._id).then((user) => {
-            return user
+            return user.type
         })
     }
-
-    console.log(checkType)
 
     Patient.find({}).then((patients) => {
       res.render('view-patients.hbs', { patients })
@@ -27,35 +25,48 @@ module.exports = (app) => {
     })
   })
 
-  app.get('/patients/:id', function (req, res) {
-   // LOOK UP THE POST
+ //  app.get('/patients/:id', function (req, res) {
+ //   // LOOK UP THE POST
+ //
+ //
+ //   if (req.user) {
+ //       Patient.findById(req.params.id).populate('meds').then((patient) => {
+ //           let currentType = ""
+ //           currentType = req.user.type === 'pharmacist' ? "isPharmacist" : ""
+ //           console.log(currentType)
+ //         res.render('show-patient.hbs', { currentType, patient })
+ //        }).catch((err) => {
+ //         console.log(err.message)
+ //        })
+ //   } else {
+ //       res.render('errorPage/401')
+ //       // console.log('Not logged')
+ //
+ //   }
+ // })
+
+ app.get('/patients/:id', function (req, res) {
+  // LOOK UP THE POST
 
 
-   if (req.user) {
+  if (req.user) {
+      Patient.findById(req.params.id).populate('meds').then((patient) => {
 
+          User.findById(req.user._id).then((user) => {
+              return user.type
+          }).then((user_type) => {
+              currentType = user_type === 'pharmacist' ? "isPharmacist" : "";
+              console.log(currentType);
+              res.render('show-patient.hbs', { currentType, patient })
+          })
+       }).catch((err) => {
+        console.log(err.message)
+       })
+  } else {
+      res.render('errorPage/401')
+      // console.log('Not logged')
 
-       // User.findById(req.user._id).then((user) => {
-       //     // console.log(user)
-       //     var currentType = user.type === 'pharmacist' ? 'isPharmacist' : 'notPharmacist';
-       //     // console.log(currentType)
-       // }).catch((err) => {
-       //     console.log(err.message)
-       // })
-
-
-       Patient.findById(req.params.id).populate('meds').then((patient) => {
-           let currentType = ""
-           currentType = req.user.type === 'pharmacist' ? "isPharmacist" : ""
-           console.log(currentType)
-         res.render('show-patient.hbs', { currentType, patient })
-        }).catch((err) => {
-         console.log(err.message)
-        })
-   } else {
-       res.render('errorPage/401')
-       // console.log('Not logged')
-
-   }
- })
+  }
+})
 
 };
