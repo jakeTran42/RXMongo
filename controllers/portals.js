@@ -49,9 +49,11 @@ module.exports = (app) => {
 
   app.get('/profile', function (req, res) {
     if (req.user) {
-        var id = req.user._id
         User.findById(req.user._id).then((cur_user) => {
-          res.render('profile', { cur_user })
+            let accountCreateDate = cur_user.createdAt.toDateString().split(' ')
+            let cleanDate = accountCreateDate[1] + ' ' + accountCreateDate[2] + ' ' + accountCreateDate[3]
+            console.log(cleanDate)
+            res.render('profile', { cur_user, cleanDate })
         }).catch((err) => {
           console.log(err.message)
         })

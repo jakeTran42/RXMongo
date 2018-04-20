@@ -229,9 +229,9 @@
   </div>
 
   <div class="patient-basic-info">
-    <h2><button style="position: relative; width: 20px; height: 20px; border-radius: 50px; right: 180px; font-weight: bold;" onclick="goBack()" type="button" id="backBtn"><</button>{{patient.firstname}} {{patient.lastname}}</h2>
+    <h2><button style="position: relative; width: 20px; height: 20px; border-radius: 50px; right: 180px; font-weight: bold;" onclick="goBack()" type="button" id="backBtn">&lang;</button>{{patient.firstname}} {{patient.lastname}}</h2>
     <div class="dobAndMedication" style="display: flex; flex-direction: row; align-items: center;">
-      <h3>DOB: {{patient.dob}}</h3>
+      <h3><span style="color: #f44271;">DOB</span> {{patientDOB}}</h3>
       <button type="button" id="medicationBtn">See All Prescription</button>
     </div>
 

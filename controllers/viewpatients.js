@@ -8,8 +8,6 @@ module.exports = (app) => {
 
   app.get('/home', function (req, res) {
 
-    // let userType = Util.checkType(req.user)
-    // console.log(userType)
 
     let checkType = () => {
         User.findById(req.user._id).then((user) => {
@@ -56,8 +54,10 @@ module.exports = (app) => {
               return user.type
           }).then((user_type) => {
               currentType = user_type === 'pharmacist' ? "isPharmacist" : "";
-              console.log(currentType);
-              res.render('show-patient.hbs', { currentType, patient })
+              // patient DOB reformatt
+              let patientDOBtoString = patient.dob.toDateString().split(' ')
+              let patientDOB = patientDOBtoString[1] + ' ' + patientDOBtoString[3]
+              res.render('show-patient.hbs', { currentType, patient, patientDOB })
           })
        }).catch((err) => {
         console.log(err.message)
