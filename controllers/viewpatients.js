@@ -23,25 +23,6 @@ module.exports = (app) => {
     })
   })
 
- //  app.get('/patients/:id', function (req, res) {
- //   // LOOK UP THE POST
- //
- //
- //   if (req.user) {
- //       Patient.findById(req.params.id).populate('meds').then((patient) => {
- //           let currentType = ""
- //           currentType = req.user.type === 'pharmacist' ? "isPharmacist" : ""
- //           console.log(currentType)
- //         res.render('show-patient.hbs', { currentType, patient })
- //        }).catch((err) => {
- //         console.log(err.message)
- //        })
- //   } else {
- //       res.render('errorPage/401')
- //       // console.log('Not logged')
- //
- //   }
- // })
 
  app.get('/patients/:id', function (req, res) {
   // LOOK UP THE POST
